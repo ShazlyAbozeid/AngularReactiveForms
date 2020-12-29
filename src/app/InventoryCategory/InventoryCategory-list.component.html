@@ -1,0 +1,70 @@
+
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+</div>
+
+<div>
+  <ejs-grid #grid id='Grid' [dataSource]='InventoryCategory' height='100%' width='100%' [toolbar]='toolbarOptions' [allowPaging]='true'
+   [allowSorting]='true' [allowFiltering]='true' [filterSettings]='filterSettings' [allowGrouping]='true' 
+  [selectionSettings]='selectionOptions' [allowExcelExport]='true' showColumnMenu='true' [allowPdfExport]='true'
+  [contextMenuItems]="contextMenuItems" (toolbarClick)='toolbarClick($event)' [pageSettings]='initialPage'
+  (columnMenuOpen)="columnMenuOpen()"(columnMenuClick)="columnMenuClick()" 
+  (contextMenuClick)='contextMenuClick($event)' >
+    <e-columns>
+      <e-column field='id' headerText='Category ID' textAlign='Right' width='120'></e-column>
+      <e-column field='ShortString' [routerLink]="['/InventoryCategory', 5,'edit']" headerText='Short String' width='120' ></e-column>
+      <e-column field='LongString' textAlign='Long String' format='c2' width='120'></e-column>
+      <e-column field='CanShowDialogForScan' headerText='CanShowDialogForScan' width='140'></e-column>
+
+      <e-column   width='55' textAlign='Center'>
+        <ng-template #template let-data>
+          <div ><button class="btn btn-outline-primary btn-sm" style="width:50px;Height:40"
+            type="button"  [routerLink]="['/InventoryCategory', 5, 'edit']">  Add</button></div>
+        </ng-template>
+     </e-column>
+
+      <e-column   width='55' textAlign='Center'>
+        <ng-template #template let-data>
+          <div ><button class="btn btn-outline-primary btn-sm"
+            style="width:50px;Height:40"
+            type="button"  
+            [routerLink]="['/InventoryCategory', 5, 'edit']">  
+            Edit
+          </button>
+        </div>
+        </ng-template>
+     </e-column>
+
+     <e-column   width='60' textAlign='Center'> 
+      <ng-template #template let-data>
+        <div ><button class="btn btn-outline-primary btn-sm"
+          style="width:50px;Height:40"
+          type="button"  
+          [routerLink]="['/InventoryCategory', 5, 'edit']">  
+          Delete
+        </button>
+      </div>
+      </ng-template>
+   </e-column>
+
+     <!--e-column headerText='Delete'  width='55' textAlign='left'>
+      <ng-template #template let-data>
+        <div ><button class="btn btn-outline-warning"
+          style="width:60px;Height:40"
+          type="button"
+          title="Delete this product"
+          (click)="DeleteCategory(1,'g')">
+          Delete
+         </button></div>
+      </ng-template>
+   </e-column-->
+
+    </e-columns>
+  </ejs-grid>
+  </div>
+<div *ngIf="errorMessage"
+     class="alert alert-danger">
+  Error: {{ errorMessage }}
+</div>

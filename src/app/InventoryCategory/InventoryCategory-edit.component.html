@@ -1,0 +1,92 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+
+  <div class="card-body">
+    <form novalidate
+          (ngSubmit)="saveProduct()"
+          [formGroup]="InventoryCategoryForm">
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="ShortstringId">ShortString</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="ShortstringId"
+                 type="text"
+                 placeholder="Name (required)"
+                 formControlName="ShortString"
+                 [ngClass]="{'is-invalid': displayMessage.ShortString }" />
+          <span class="invalid-feedback">
+            {{displayMessage.ShortString}}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="LongstringId">LongString</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="LongstringId"
+                 type="text"
+                 placeholder="Code (required)"
+                 formControlName="LongString"
+                 [ngClass]="{'is-invalid': displayMessage.LongString}" />
+          <span class="invalid-feedback">
+            {{displayMessage.LongString}}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="CanShowDialogForScanId">CanShowDialogForScan</label>
+
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="CanShowDialogForScanId"
+                 type="text"
+                 placeholder="Rating (1-5)"
+                 formControlName="CanShowDialogForScan"
+                 [ngClass]="{'is-invalid': displayMessage.CanShowDialogForScan}" />
+          <span class="invalid-feedback">
+            {{displayMessage.CanShowDialogForScan}}
+          </span>
+        </div>
+      </div>
+
+      
+      <div class="form-group row mb-2">
+        <div class="offset-md-2 col-md-4">
+          <button class="btn btn-primary mr-3"
+                  style="width:80px;"
+                  type="submit"
+                  [title]="InventoryCategoryForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                  [disabled]="!InventoryCategoryForm.valid">
+            Save
+          </button>
+          <button class="btn btn-outline-secondary mr-3"
+                  style="width:80px;"
+                  type="button"
+                  title="Cancel your edits"
+                  [routerLink]="['/InventoryCategory']">
+            Cancel
+          </button>
+          <button class="btn btn-outline-warning"
+                  style="width:80px"
+                  type="button"
+                  title="Delete this product"
+                  (click)="DeleteCategory()">
+            Delete
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="alert alert-danger"
+       *ngIf="errorMessage">{{errorMessage}}
+  </div>
+</div>
